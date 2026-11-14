@@ -1,0 +1,3570 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NESO — Coffee Shop &amp; Pastries</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@700&family=Nunito:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-cream: #F4F1E8;
+      --bg-wave: #E8E2D4;
+      --bg-card: #FAF8F3;
+      --bg-white: #FFFFFF;
+      --neso-green: #2D5822;
+      --neso-green-dark: #1F3F17;
+      --sage-primary: #8C9E8C;
+      --sage-dark: #5F755F;
+      --sage-soft: #E1E7DF;
+      --terracotta: #DF854A;
+      --terracotta-hover: #CC7136;
+      --text-primary: #222722;
+      --text-secondary: #5E665E;
+      --text-muted: #868E86;
+      --border-soft: rgba(34, 39, 34, 0.08);
+      --border-strong: rgba(45, 88, 34, 0.18);
+      --shadow-soft: 0 16px 38px rgba(34, 39, 34, 0.06);
+      --shadow-card: 0 8px 24px rgba(34, 39, 34, 0.045);
+      --radius-sm: 12px;
+      --radius-md: 20px;
+      --radius-lg: 28px;
+      --radius-pill: 9999px;
+      --font-logo: 'Fredoka', cursive, sans-serif;
+      --font-display: 'Nunito', sans-serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+      --transition: 220ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      background-color: var(--bg-cream);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      line-height: 1.55;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font-family: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+      color: inherit;
+    }
+
+    input, select {
+      font-family: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .page-wrapper {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .bg-blob-top {
+      position: absolute;
+      top: -80px;
+      right: -120px;
+      width: 640px;
+      height: 540px;
+      background: radial-gradient(circle, rgba(140, 158, 140, 0.22) 0%, rgba(232, 226, 212, 0) 72%);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ==================== CUSTOM NESO BRAND LOGO ==================== */
+    .neso-logo-lockup {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: flex-start;
+      color: var(--neso-green);
+      user-select: none;
+      transition: transform var(--transition);
+    }
+
+    .neso-logo-lockup:hover {
+      transform: translateY(-1px);
+    }
+
+    .neso-logo-top {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .neso-cat-svg {
+      width: 34px;
+      height: 44px;
+      flex-shrink: 0;
+    }
+
+    .neso-wordmark {
+      font-family: var(--font-logo);
+      font-weight: 700;
+      font-size: 1.42rem;
+      line-height: 0.84;
+      letter-spacing: -0.03em;
+      color: var(--neso-green);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .neso-submark {
+      font-family: var(--font-body);
+      font-size: 0.48rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--neso-green);
+      margin-top: 3px;
+      opacity: 0.9;
+    }
+
+    /* ==================== NAVBAR ==================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 90;
+      padding: 12px 0;
+      background: rgba(244, 241, 232, 0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid rgba(45, 88, 34, 0.08);
+    }
+
+    .navbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav-link {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      padding: 8px 13px;
+      border-radius: var(--radius-pill);
+      transition: all var(--transition);
+    }
+
+    .nav-link:hover {
+      background-color: rgba(45, 88, 34, 0.08);
+      color: var(--neso-green);
+    }
+
+    .nav-link.active {
+      background-color: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-cart {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-white);
+      border: 1px solid var(--border-soft);
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+      transition: all var(--transition);
+    }
+
+    .btn-cart:hover {
+      border-color: var(--neso-green);
+      transform: translateY(-1px);
+    }
+
+    .cart-count {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 21px;
+      height: 21px;
+      padding: 0 6px;
+      border-radius: var(--radius-pill);
+      background: var(--neso-green);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .btn-terracotta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 11px 22px;
+      border-radius: var(--radius-pill);
+      background-color: var(--terracotta);
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 700;
+      box-shadow: 0 8px 20px rgba(223, 133, 74, 0.28);
+      transition: all var(--transition);
+    }
+
+    .btn-terracotta:hover {
+      background-color: var(--terracotta-hover);
+      transform: translateY(-1px);
+    }
+
+    .hamburger-btn {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--bg-white);
+      border: 1px solid var(--border-soft);
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      padding: 14px 24px 20px;
+      background: var(--bg-card);
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .mobile-nav.open {
+      display: flex;
+    }
+
+    .mobile-nav .nav-link {
+      text-align: left;
+      width: 100%;
+    }
+
+    /* ==================== HERO SECTION ==================== */
+    .hero {
+      position: relative;
+      z-index: 1;
+      padding: 36px 0 60px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 0.96fr 1.04fr;
+      gap: 44px;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: rgba(45, 88, 34, 0.09);
+      color: var(--neso-green);
+      font-size: 0.76rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(2.25rem, 4.2vw, 3.35rem);
+      font-weight: 800;
+      line-height: 1.12;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      margin-bottom: 16px;
+    }
+
+    .hero-subtitle {
+      font-size: 0.98rem;
+      color: var(--text-secondary);
+      max-width: 420px;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta-wrap .btn-terracotta {
+      padding: 13px 28px;
+      font-size: 0.9rem;
+    }
+
+    .btn-outline-green {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 24px;
+      border-radius: var(--radius-pill);
+      border: 1.5px solid var(--neso-green);
+      color: var(--neso-green);
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: all var(--transition);
+    }
+
+    .btn-outline-green:hover {
+      background-color: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .hero-badges {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+
+    .hero-badge-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hero-badge-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: rgba(45, 88, 34, 0.1);
+      color: var(--neso-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .hero-badge-text {
+      font-size: 0.76rem;
+      line-height: 1.25;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .hero-media {
+      position: relative;
+    }
+
+    .hero-photo-frame {
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      aspect-ratio: 4 / 3.2;
+      box-shadow: var(--shadow-soft);
+      background: #D8D0C2;
+    }
+
+    .hero-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 550ms ease;
+    }
+
+    .hero-photo-frame:hover img {
+      transform: scale(1.03);
+    }
+
+    .arabica-badge {
+      position: absolute;
+      right: 18px;
+      bottom: -16px;
+      background: #FAF8F3;
+      border: 2px solid var(--bg-cream);
+      border-radius: 20px;
+      padding: 12px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      box-shadow: var(--shadow-card);
+      color: var(--neso-green);
+    }
+
+    .arabica-badge span {
+      font-size: 0.72rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: var(--neso-green);
+    }
+
+    /* ==================== 4 FEATURES BAND ==================== */
+    .features-band {
+      background: linear-gradient(180deg, rgba(250, 248, 243, 0.72) 0%, rgba(250, 248, 243, 0.98) 100%);
+      border-top: 1px solid rgba(45, 88, 34, 0.06);
+      border-bottom: 1px solid rgba(45, 88, 34, 0.06);
+      padding: 40px 0;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      padding: 20px 14px;
+      border-radius: var(--radius-md);
+      border: 1px solid transparent;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+
+    .feature-item:hover {
+      background: #FFFFFF;
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-card);
+      transform: translateY(-3px);
+    }
+
+    .feature-icon {
+      width: 44px;
+      height: 44px;
+      color: var(--neso-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    .feature-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .feature-desc {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      color: var(--text-secondary);
+      max-width: 220px;
+    }
+
+    .feature-hint {
+      margin-top: 10px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--terracotta);
+    }
+
+    /* ==================== UPGRADED POPULAR DRINKS SHOWCASE ==================== */
+    .popular-section {
+      padding: 52px 0 36px;
+    }
+
+    .popular-showcase {
+      position: relative;
+      background: linear-gradient(145deg, #6E856E 0%, #4E674E 55%, #3D543D 100%);
+      border-radius: 32px;
+      padding: 38px 40px 32px;
+      color: #FFFFFF;
+      overflow: hidden;
+      box-shadow: 0 22px 48px rgba(45, 88, 34, 0.18);
+    }
+
+    .popular-showcase::before {
+      content: "";
+      position: absolute;
+      top: -90px;
+      right: -70px;
+      width: 340px;
+      height: 340px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .popular-top-bar {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .popular-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.14);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .popular-heading {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.3rem);
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .popular-sub {
+      font-size: 0.88rem;
+      color: rgba(255, 255, 255, 0.86);
+      max-width: 440px;
+      margin-top: 6px;
+    }
+
+    .btn-white-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      background-color: var(--bg-card);
+      color: var(--text-primary);
+      font-size: 0.82rem;
+      font-weight: 800;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.14);
+      transition: all var(--transition);
+    }
+
+    .btn-white-pill:hover {
+      background-color: #FFFFFF;
+      transform: translateY(-2px);
+    }
+
+    .popular-cards-grid {
+      position: relative;
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .pop-drink-card {
+      background: rgba(255, 255, 255, 0.11);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(12px);
+      border-radius: 24px;
+      padding: 18px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: transform var(--transition), background var(--transition), border-color var(--transition);
+    }
+
+    .pop-drink-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255, 255, 255, 0.16);
+      border-color: rgba(255, 255, 255, 0.34);
+    }
+
+    .pop-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .pop-rank-badge {
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--terracotta);
+      color: #FFFFFF;
+      font-size: 0.66rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .pop-rank-badge.alt {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .pop-rating {
+      font-size: 0.74rem;
+      font-weight: 700;
+      color: #FFE39F;
+    }
+
+    .pop-drink-visual {
+      position: relative;
+      width: 132px;
+      height: 132px;
+      margin: 0 auto 14px;
+      border-radius: 50%;
+      padding: 6px;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0.08));
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+    }
+
+    .pop-drink-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 50%;
+      transition: transform 400ms ease;
+    }
+
+    .pop-drink-card:hover .pop-drink-visual img {
+      transform: scale(1.06);
+    }
+
+    .pop-temp-switch {
+      display: inline-flex;
+      align-self: center;
+      background: rgba(0, 0, 0, 0.22);
+      border-radius: var(--radius-pill);
+      padding: 3px;
+      margin-bottom: 12px;
+    }
+
+    .temp-chip {
+      padding: 4px 11px;
+      border-radius: var(--radius-pill);
+      font-size: 0.68rem;
+      font-weight: 700;
+      color: rgba(255, 255, 255, 0.78);
+      transition: all var(--transition);
+    }
+
+    .temp-chip.active {
+      background: #FFFFFF;
+      color: var(--neso-green);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .pop-drink-title {
+      font-family: var(--font-display);
+      font-size: 1.08rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 4px;
+    }
+
+    .pop-tasting-notes {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-bottom: 12px;
+    }
+
+    .note-tag {
+      font-size: 0.64rem;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.12);
+      color: rgba(255, 255, 255, 0.92);
+    }
+
+    .pop-card-footer {
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.14);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .pop-price {
+      font-size: 0.95rem;
+      font-weight: 800;
+    }
+
+    .pop-btn-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-pop-custom {
+      padding: 7px 11px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.16);
+      color: #FFFFFF;
+      font-size: 0.72rem;
+      font-weight: 700;
+      transition: background var(--transition);
+    }
+
+    .btn-pop-custom:hover {
+      background: rgba(255, 255, 255, 0.28);
+    }
+
+    .btn-pop-order {
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      background: var(--terracotta);
+      color: #FFFFFF;
+      font-size: 0.74rem;
+      font-weight: 800;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
+      transition: background var(--transition), transform var(--transition);
+    }
+
+    .btn-pop-order:hover {
+      background: var(--terracotta-hover);
+      transform: scale(1.04);
+    }
+
+    /* Quick Pairing Upsell Strip inside Popular Banner */
+    .popular-pairing-strip {
+      position: relative;
+      z-index: 2;
+      margin-top: 22px;
+      background: rgba(244, 241, 232, 0.12);
+      border: 1px dashed rgba(255, 255, 255, 0.32);
+      border-radius: 18px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .pairing-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 0.84rem;
+    }
+
+    .pairing-badge {
+      background: #FFE39F;
+      color: var(--neso-green-dark);
+      font-size: 0.68rem;
+      font-weight: 800;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      text-transform: uppercase;
+    }
+
+    /* ==================== NEW SECTION 1: BUNDLING & PROMO ==================== */
+    .bundles-section {
+      padding: 28px 0 44px;
+    }
+
+    .section-header-flex {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .section-eyebrow-green {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--neso-green);
+      margin-bottom: 4px;
+    }
+
+    .section-title-lg {
+      font-family: var(--font-display);
+      font-size: clamp(1.55rem, 2.8vw, 2.05rem);
+      font-weight: 800;
+      line-height: 1.18;
+      color: var(--text-primary);
+    }
+
+    .bundles-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .bundle-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .bundle-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .bundle-cover {
+      position: relative;
+      height: 175px;
+      overflow: hidden;
+    }
+
+    .bundle-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .bundle-save-pill {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--neso-green);
+      color: #FFFFFF;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    .bundle-body {
+      padding: 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .bundle-name {
+      font-family: var(--font-display);
+      font-size: 1.12rem;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .bundle-desc {
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      margin-bottom: 16px;
+    }
+
+    .bundle-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .price-strike {
+      display: block;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      text-decoration: line-through;
+    }
+
+    .price-final {
+      font-size: 1rem;
+      font-weight: 800;
+      color: var(--neso-green);
+    }
+
+    /* ==================== FULL INTERACTIVE MENU SECTION ==================== */
+    .full-menu-section {
+      padding: 28px 0 54px;
+    }
+
+    .menu-header-bar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .section-heading-center {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--text-primary);
+      margin-bottom: 6px;
+    }
+
+    .section-sub-center {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      max-width: 520px;
+      margin-bottom: 20px;
+    }
+
+    .menu-controls-bar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      width: 100%;
+      margin-bottom: 24px;
+    }
+
+    .filter-pills {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .filter-pill {
+      padding: 9px 18px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+
+    .filter-pill:hover {
+      border-color: var(--neso-green);
+      color: var(--neso-green);
+    }
+
+    .filter-pill.active {
+      background: var(--neso-green);
+      border-color: var(--neso-green);
+      color: #FFFFFF;
+      box-shadow: 0 4px 14px rgba(45, 88, 34, 0.22);
+    }
+
+    .menu-search-box {
+      position: relative;
+      min-width: 240px;
+      flex: 1;
+      max-width: 310px;
+    }
+
+    .menu-search-box input {
+      width: 100%;
+      padding: 10px 16px 10px 38px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-soft);
+      background: var(--bg-white);
+      font-size: 0.84rem;
+      color: var(--text-primary);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+
+    .menu-search-box input:focus {
+      border-color: var(--neso-green);
+    }
+
+    .menu-search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      pointer-events: none;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .menu-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: grid;
+      grid-template-columns: 112px 1fr;
+      gap: 14px;
+      align-items: stretch;
+      box-shadow: var(--shadow-card);
+      transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+    }
+
+    .menu-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .menu-thumb {
+      width: 112px;
+      height: 118px;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #E8E1D5;
+      position: relative;
+    }
+
+    .menu-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .menu-tag {
+      position: absolute;
+      top: 6px;
+      left: 6px;
+      background: rgba(45, 88, 34, 0.92);
+      color: #FFFFFF;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+    }
+
+    .menu-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .menu-cat-label {
+      font-size: 0.64rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--neso-green);
+      margin-bottom: 2px;
+    }
+
+    .menu-title {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .menu-desc {
+      font-size: 0.74rem;
+      line-height: 1.4;
+      color: var(--text-secondary);
+    }
+
+    .menu-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .menu-price {
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .menu-card-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-customize {
+      padding: 6px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(45, 88, 34, 0.09);
+      color: var(--neso-green);
+      font-size: 0.7rem;
+      font-weight: 700;
+      transition: all var(--transition);
+    }
+
+    .btn-customize:hover {
+      background: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .btn-plus {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background-color: var(--neso-green);
+      color: #FFFFFF;
+      font-size: 1.15rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all var(--transition);
+      flex-shrink: 0;
+    }
+
+    .btn-plus:hover {
+      background-color: var(--neso-green-dark);
+      transform: scale(1.08);
+    }
+
+    /* ==================== COFFEE BEANS SECTION ==================== */
+    .beans-section {
+      padding: 8px 0 48px;
+    }
+
+    .beans-card {
+      background: linear-gradient(135deg, #EDE5D7 0%, #E2D9C7 100%);
+      border-radius: var(--radius-lg);
+      padding: 34px 38px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 36px;
+      align-items: center;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .beans-title {
+      font-family: var(--font-display);
+      font-size: 1.85rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 12px;
+    }
+
+    .beans-desc {
+      font-size: 0.88rem;
+      color: var(--text-secondary);
+      max-width: 400px;
+      margin-bottom: 22px;
+    }
+
+    .btn-green {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 26px;
+      border-radius: var(--radius-pill);
+      background-color: var(--neso-green);
+      color: #FFFFFF;
+      font-size: 0.85rem;
+      font-weight: 700;
+      margin-bottom: 28px;
+      transition: all var(--transition);
+    }
+
+    .btn-green:hover {
+      background-color: var(--neso-green-dark);
+      transform: translateY(-1px);
+    }
+
+    .beans-perks {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      max-width: 390px;
+    }
+
+    .bean-perk {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 6px;
+      color: var(--neso-green);
+    }
+
+    .bean-perk span {
+      font-size: 0.72rem;
+      line-height: 1.25;
+      color: var(--text-secondary);
+      font-weight: 600;
+    }
+
+    .beans-photo {
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      height: 265px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .beans-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* ==================== NEW SECTION 2: CAFE ATMOSPHERE & ZONES ==================== */
+    .space-section {
+      padding: 20px 0 56px;
+    }
+
+    .live-seat-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-card);
+      border: 1px solid var(--border-strong);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--neso-green);
+    }
+
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #22C55E;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.2);
+    }
+
+    .space-bento-grid {
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 20px;
+    }
+
+    .space-card {
+      position: relative;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      min-height: 360px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 26px;
+      color: #FFFFFF;
+      box-shadow: var(--shadow-soft);
+    }
+
+    .space-card img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 550ms ease;
+    }
+
+    .space-card:hover img {
+      transform: scale(1.04);
+    }
+
+    .space-card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(20, 26, 20, 0.08) 25%, rgba(20, 26, 20, 0.82) 100%);
+      pointer-events: none;
+    }
+
+    .space-card-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .space-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .space-card.compact {
+      min-height: 170px;
+      padding: 20px;
+    }
+
+    .space-tag {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(8px);
+      font-size: 0.68rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .space-title {
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+
+    .space-card.compact .space-title {
+      font-size: 1.05rem;
+    }
+
+    .space-desc {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 14px;
+      max-width: 420px;
+    }
+
+    /* ==================== NEW SECTION 3: REVIEWS & FAQ ACCORDION ==================== */
+    .community-section {
+      padding: 12px 0 56px;
+    }
+
+    .community-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .reviews-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .review-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .review-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+
+    .reviewer-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .reviewer-avatar {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .review-text {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      line-height: 1.55;
+    }
+
+    .faq-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      box-shadow: var(--shadow-card);
+    }
+
+    .faq-question {
+      width: 100%;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      text-align: left;
+      font-family: var(--font-display);
+      font-size: 0.98rem;
+      font-weight: 800;
+      color: var(--text-primary);
+    }
+
+    .faq-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--bg-cream);
+      color: var(--neso-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      flex-shrink: 0;
+      transition: transform var(--transition);
+    }
+
+    .faq-item.open .faq-icon {
+      transform: rotate(45deg);
+      background: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      padding: 0 20px;
+      font-size: 0.84rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      transition: max-height 280ms ease, padding 280ms ease;
+    }
+
+    .faq-item.open .faq-answer {
+      max-height: 180px;
+      padding: 0 20px 18px;
+    }
+
+    /* ==================== VISIT & NEWSLETTER SECTION ==================== */
+    .bottom-cta-section {
+      padding: 8px 0 56px;
+    }
+
+    .bottom-grid {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .visit-box {
+      padding: 20px 16px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      transition: background-color 350ms ease, box-shadow 350ms ease;
+    }
+
+    .visit-box.highlight-pulse {
+      background-color: var(--bg-card);
+      box-shadow: 0 0 0 2px var(--neso-green);
+    }
+
+    .visit-title {
+      font-family: var(--font-display);
+      font-size: 1.45rem;
+      font-weight: 800;
+      margin-bottom: 18px;
+    }
+
+    .visit-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+
+    .visit-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .visit-icon {
+      color: var(--neso-green);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .newsletter-card {
+      background-color: var(--bg-card);
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-lg);
+      padding: 30px 32px;
+      display: grid;
+      grid-template-columns: 1.25fr 0.75fr;
+      gap: 20px;
+      align-items: center;
+      box-shadow: var(--shadow-card);
+    }
+
+    .newsletter-title {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 18px;
+    }
+
+    .newsletter-form {
+      display: flex;
+      align-items: center;
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-pill);
+      padding: 4px;
+      max-width: 390px;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      border: none;
+      outline: none;
+      background: transparent;
+      padding: 9px 14px;
+      font-size: 0.84rem;
+      color: var(--text-primary);
+      min-width: 0;
+    }
+
+    .newsletter-form button {
+      padding: 10px 20px;
+      border-radius: var(--radius-pill);
+      background-color: var(--terracotta);
+      color: #FFFFFF;
+      font-size: 0.82rem;
+      font-weight: 700;
+      transition: background var(--transition);
+      flex-shrink: 0;
+    }
+
+    .newsletter-form button:hover {
+      background-color: var(--terracotta-hover);
+    }
+
+    .newsletter-feedback {
+      font-size: 0.78rem;
+      color: var(--neso-green);
+      font-weight: 700;
+      margin-top: 8px;
+      min-height: 18px;
+    }
+
+    .cafe-sketch {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: var(--neso-green);
+      opacity: 0.8;
+    }
+
+    /* ==================== FOOTER ==================== */
+    .footer {
+      background-color: var(--neso-green);
+      color: #FFFFFF;
+      padding: 24px 0;
+      border-top-left-radius: 26px;
+      border-top-right-radius: 26px;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 18px;
+      font-size: 0.8rem;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .footer-socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-social-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, 0.16);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background var(--transition);
+    }
+
+    .footer-social-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+
+    .footer-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .footer-links a:hover {
+      text-decoration: underline;
+    }
+
+    /* ==================== SLIDE-OVER CART DRAWER ==================== */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 28, 24, 0.5);
+      backdrop-filter: blur(4px);
+      z-index: 220;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 240ms ease;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .cart-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      width: 100%;
+      max-width: 420px;
+      height: 100vh;
+      background: var(--bg-card);
+      z-index: 230;
+      display: flex;
+      flex-direction: column;
+      box-shadow: -16px 0 44px rgba(0, 0, 0, 0.16);
+      transform: translateX(100%);
+      transition: transform 280ms cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .cart-drawer.open {
+      transform: translateX(0);
+    }
+
+    .cart-drawer-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border-soft);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .cart-mode-toggle {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      padding: 12px 24px 0;
+    }
+
+    .mode-btn {
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-cream);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+
+    .mode-btn.active {
+      background: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .cart-drawer-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 24px;
+    }
+
+    .cart-drawer-footer {
+      padding: 18px 24px 24px;
+      background: #FFFFFF;
+      border-top: 1px solid var(--border-soft);
+    }
+
+    .promo-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .promo-row input {
+      flex: 1;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-soft);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .promo-row button {
+      padding: 8px 14px;
+      border-radius: var(--radius-sm);
+      background: var(--bg-cream);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--neso-green);
+    }
+
+    /* ==================== INTERACTIVE MODALS ==================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(24, 28, 24, 0.55);
+      backdrop-filter: blur(6px);
+      z-index: 200;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-backdrop.active {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--bg-card);
+      border-radius: var(--radius-lg);
+      width: 100%;
+      max-width: 520px;
+      max-height: 88vh;
+      overflow-y: auto;
+      padding: 28px;
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.22);
+      position: relative;
+      animation: modalPop 220ms ease;
+    }
+
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.96) translateY(8px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+    }
+
+    .modal-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 800;
+    }
+
+    .modal-close {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--bg-cream);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+    }
+
+    .modal-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .modal-tab-btn {
+      padding: 7px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-cream);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+
+    .modal-tab-btn.active {
+      background: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .about-tab-panel {
+      display: none;
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      line-height: 1.65;
+    }
+
+    .about-tab-panel.active {
+      display: block;
+    }
+
+    .about-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .about-stat-box {
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      border-radius: var(--radius-sm);
+      padding: 12px;
+      text-align: center;
+    }
+
+    .about-stat-box strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      color: var(--neso-green);
+    }
+
+    .about-stat-box span {
+      font-size: 0.72rem;
+      color: var(--text-secondary);
+    }
+
+    .option-group-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: block;
+    }
+
+    .option-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .opt-pill {
+      padding: 8px 14px;
+      border-radius: var(--radius-pill);
+      background: #FFFFFF;
+      border: 1px solid var(--border-soft);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      transition: all var(--transition);
+    }
+
+    .opt-pill.selected {
+      background: var(--neso-green);
+      border-color: var(--neso-green);
+      color: #FFFFFF;
+    }
+
+    .form-group {
+      margin-bottom: 14px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-primary);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(34, 39, 34, 0.14);
+      background: #FFFFFF;
+      font-size: 0.88rem;
+      color: var(--text-primary);
+    }
+
+    .form-row-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .modal-item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border-soft);
+    }
+
+    .modal-item-row:last-child {
+      border-bottom: none;
+    }
+
+    .cart-qty-controls {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--bg-cream);
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-weight: 700;
+      font-size: 0.85rem;
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--neso-green);
+      color: #FFFFFF;
+      padding: 12px 22px;
+      border-radius: var(--radius-pill);
+      font-size: 0.84rem;
+      font-weight: 700;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+      z-index: 300;
+      opacity: 0;
+      pointer-events: none;
+      transition: all 240ms ease;
+      white-space: nowrap;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    /* Scroll Reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 500ms ease, transform 500ms ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ==================== RESPONSIVE BREAKPOINTS ==================== */
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .beans-card,
+      .bottom-grid,
+      .space-bento-grid,
+      .community-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .popular-cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .features-grid,
+      .bundles-grid,
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hamburger-btn {
+        display: inline-flex;
+      }
+
+      .popular-showcase {
+        padding: 28px 20px;
+      }
+
+      .popular-cards-grid,
+      .bundles-grid,
+      .menu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-card {
+        grid-template-columns: 1fr;
+      }
+
+      .cafe-sketch {
+        display: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+      }
+
+      .beans-card {
+        padding: 24px 20px;
+      }
+
+      .form-row-2,
+      .about-stat-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-wrapper">
+    <div class="bg-blob-top" aria-hidden="true"></div>
+
+    <!-- ==================== NAVBAR WITH NESO LOGO ==================== -->
+    <header class="navbar">
+      <div class="container navbar-inner">
+        <a href="#beranda" class="neso-logo-lockup" aria-label="NESO Coffee Shop & Pastries Beranda">
+          <div class="neso-logo-top">
+            <svg class="neso-cat-svg" viewBox="0 0 88 112" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+              <path d="M24 12 L29 52 C29 56 59 56 59 52 L64 12" stroke="#2D5822" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round" fill="#F4F1E8"/>
+              <ellipse cx="44" cy="12" rx="20" ry="4.5" stroke="#2D5822" stroke-width="3.2" fill="#F4F1E8"/>
+              <path d="M26 24 C32 27.5 56 27.5 62 24" stroke="#2D5822" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M26.5 22 C33 19.5 55 19.5 61.5 22" stroke="#2D5822" stroke-width="1.8" stroke-linecap="round" opacity="0.65"/>
+              <rect x="53" y="31" width="3" height="14" rx="1.5" stroke="#2D5822" stroke-width="1.8" fill="#F4F1E8"/>
+              <path d="M18 106 L18 28 C18 22 25 22 26 28 L29 56 L33 44 L40 53 C42.5 52.5 45.5 52.5 48 53 L55 44 L59 56 L62 28 C63 22 70 22 70 28 L70 76 C70 86 64 93 58 95 L58 106 Z" fill="#2D5822"/>
+              <circle cx="43" cy="68" r="3.6" fill="#F4F1E8"/>
+              <circle cx="44.2" cy="68" r="1.6" fill="#2D5822"/>
+              <circle cx="57" cy="67" r="3.4" fill="#F4F1E8"/>
+              <circle cx="58.2" cy="67" r="1.5" fill="#2D5822"/>
+              <ellipse cx="51" cy="72" rx="1.8" ry="1.2" fill="#F4F1E8"/>
+              <circle cx="37" cy="72" r="1" fill="#F4F1E8"/>
+              <circle cx="63" cy="71" r="1" fill="#F4F1E8"/>
+            </svg>
+
+            <div class="neso-wordmark">
+              <span>NE</span>
+              <span>SO</span>
+            </div>
+          </div>
+          <span class="neso-submark">COFFEE SHOP &amp; PASTRIES</span>
+        </a>
+
+        <nav class="nav-links" aria-label="Navigasi Utama">
+          <button type="button" class="nav-link active" data-nav="menu">Menu</button>
+          <button type="button" class="nav-link" data-nav="promo">Paket Promo</button>
+          <button type="button" class="nav-link" data-nav="tentang">Tentang Kami</button>
+          <button type="button" class="nav-link" data-nav="biji">Biji Kopi</button>
+          <button type="button" class="nav-link" data-nav="suasana">Suasana</button>
+          <button type="button" class="nav-link" data-nav="kontak">Kontak</button>
+        </nav>
+
+        <div class="nav-actions">
+          <button type="button" class="btn-cart" id="openCartBtn" aria-label="Buka Keranjang Pesanan">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+              <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/>
+              <path d="M3 6h18"/>
+              <path d="M16 10a4 4 0 0 1-8 0"/>
+            </svg>
+            <span>Keranjang</span>
+            <span class="cart-count" id="cartCount">0</span>
+          </button>
+
+          <button type="button" class="btn-terracotta" id="openReserveBtn">Pesan Meja</button>
+
+          <button type="button" class="hamburger-btn" id="mobileMenuBtn" aria-label="Buka Menu Navigasi">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <nav class="mobile-nav" id="mobileNav" aria-label="Navigasi Mobile">
+        <button type="button" class="nav-link" data-nav="menu">Menu</button>
+        <button type="button" class="nav-link" data-nav="promo">Paket Promo</button>
+        <button type="button" class="nav-link" data-nav="tentang">Tentang Kami</button>
+        <button type="button" class="nav-link" data-nav="biji">Biji Kopi</button>
+        <button type="button" class="nav-link" data-nav="suasana">Suasana</button>
+        <button type="button" class="nav-link" data-nav="kontak">Kontak</button>
+      </nav>
+    </header>
+
+    <main>
+      <!-- ==================== HERO SECTION ==================== -->
+      <section class="hero" id="beranda">
+        <div class="container hero-grid">
+          <div class="reveal">
+            <div class="hero-eyebrow">
+              <span>🐾</span>
+              <span>NESO Roastery &amp; Bakehouse • Buka 08:00 – 21:00</span>
+            </div>
+
+            <h1 class="hero-title">Kopi yang bikin jatuh cinta sejak tegukan pertama</h1>
+            <p class="hero-subtitle">
+              Kopi spesialti racikan barista NESO, pastri panggang segar setiap pagi, dan sudut nyaman di jantung kota.
+            </p>
+
+            <div class="hero-cta-wrap">
+              <a href="#minuman-populer" class="btn-terracotta">Coba Minuman Favorit</a>
+              <button type="button" class="btn-outline-green" id="heroAboutBtn">Tentang NESO</button>
+            </div>
+
+            <div class="hero-badges">
+              <div class="hero-badge-item">
+                <div class="hero-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                    <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+                  </svg>
+                </div>
+                <span class="hero-badge-text">Kopi<br />spesialti</span>
+              </div>
+
+              <div class="hero-badge-item">
+                <div class="hero-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/>
+                  </svg>
+                </div>
+                <span class="hero-badge-text">Dibuat<br />penuh cinta</span>
+              </div>
+
+              <div class="hero-badge-item">
+                <div class="hero-badge-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                    <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+                    <line x1="6" y1="2" x2="6" y2="4"/>
+                    <line x1="10" y1="2" x2="10" y2="4"/>
+                    <line x1="14" y1="2" x2="14" y2="4"/>
+                  </svg>
+                </div>
+                <span class="hero-badge-text">Nyaman<br />setiap hari</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="hero-media reveal">
+            <div class="hero-photo-frame">
+              <img
+                src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=1000&q=85"
+                alt="Secangkir latte art hangat dan croissant renyah khas NESO"
+              />
+            </div>
+
+            <div class="arabica-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/>
+                <path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/>
+              </svg>
+              <span>100%<br />arabika</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== 4 FEATURES SECTION ==================== -->
+      <section class="features-band" id="tentang">
+        <div class="container features-grid reveal">
+          <article class="feature-item" onclick="openAboutWithTab('roastery')">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <ellipse cx="10" cy="12" rx="5" ry="8" transform="rotate(-25 10 12)"/>
+                <path d="M7.5 6.5c2 3.5 3 7 5 11"/>
+                <path d="M16 5a5 7 0 0 1 2 11"/>
+              </svg>
+            </div>
+            <h2 class="feature-title">Biji Kopi Pilihan</h2>
+            <p class="feature-desc">Bekerja sama hanya dengan perkebunan terkurasi dan lot spesialti terbaik.</p>
+            <span class="feature-hint">Pelajari asal biji →</span>
+          </article>
+
+          <article class="feature-item" onclick="openAboutWithTab('roastery')">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+              </svg>
+            </div>
+            <h2 class="feature-title">Sangrai Segar</h2>
+            <p class="feature-desc">Disangrai dalam batch kecil setiap minggu untuk menjaga kesegaran aroma.</p>
+            <span class="feature-hint">Lihat jadwal sangrai →</span>
+          </article>
+
+          <article class="feature-item" onclick="openAboutWithTab('filosofi')">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <circle cx="12" cy="7" r="4"/>
+                <path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>
+                <path d="M9 14h6"/>
+              </svg>
+            </div>
+            <h2 class="feature-title">Barista Berpengalaman</h2>
+            <p class="feature-desc">Para profesional yang menyeduh setiap cangkir dengan ketelitian dan sepenuh hati.</p>
+            <span class="feature-hint">Kenali tim NESO →</span>
+          </article>
+
+          <article class="feature-item" onclick="openAboutWithTab('fasilitas')">
+            <div class="feature-icon">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
+                <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/>
+                <path d="M7 3c0 1.5 1 2 1 3"/>
+                <path d="M11 3c0 1.5 1 2 1 3"/>
+              </svg>
+            </div>
+            <h2 class="feature-title">Ruang yang Nyaman</h2>
+            <p class="feature-desc">Terang, tenang, dan hangat — tempat favorit untuk bekerja maupun bersantai.</p>
+            <span class="feature-hint">Cek fasilitas kafe →</span>
+          </article>
+        </div>
+      </section>
+
+      <!-- ==================== UPGRADED POPULAR DRINKS SHOWCASE ==================== -->
+      <section class="popular-section" id="minuman-populer">
+        <div class="container">
+          <div class="popular-showcase reveal">
+            <div class="popular-top-bar">
+              <div>
+                <div class="popular-kicker">✦ Racikan Terfavorit Minggu Ini</div>
+                <h2 class="popular-heading">Minuman Populer NESO</h2>
+                <p class="popular-sub">
+                  Pilih penyajian <strong>Iced</strong> atau <strong>Hot</strong> langsung di kartu, atau klik <strong>Atur</strong> untuk menyesuaikan gula &amp; oat milk.
+                </p>
+              </div>
+              <a href="#katalog-menu" class="btn-white-pill">Lihat Semua 14 Menu →</a>
+            </div>
+
+            <div class="popular-cards-grid" id="popularDrinksGrid">
+              <!-- Card 1 -->
+              <article class="pop-drink-card" data-drink-name="NESO Signature Aren Latte" data-drink-price="36000">
+                <div>
+                  <div class="pop-card-meta">
+                    <span class="pop-rank-badge">#1 Terlaris</span>
+                    <span class="pop-rating">★ 4.9 (420+)</span>
+                  </div>
+                  <div class="pop-drink-visual">
+                    <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=400&q=80" alt="NESO Signature Aren Latte" loading="lazy" />
+                  </div>
+                  <div class="pop-temp-switch" role="group" aria-label="Pilih Suhu">
+                    <button type="button" class="temp-chip active" data-temp="Iced">Iced</button>
+                    <button type="button" class="temp-chip" data-temp="Hot">Hot</button>
+                  </div>
+                  <h3 class="pop-drink-title">NESO Aren Latte</h3>
+                  <div class="pop-tasting-notes">
+                    <span class="note-tag">Gula Aren</span>
+                    <span class="note-tag">Creamy</span>
+                    <span class="note-tag">Bold</span>
+                  </div>
+                </div>
+                <div class="pop-card-footer">
+                  <span class="pop-price">Rp 36.000</span>
+                  <div class="pop-btn-group">
+                    <button type="button" class="btn-pop-custom" onclick="openCustomizeModal('NESO Signature Aren Latte', 36000)">Atur</button>
+                    <button type="button" class="btn-pop-order" onclick="quickAddPopular(this)">+ Pesan</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 2 -->
+              <article class="pop-drink-card" data-drink-name="Latte Klasik" data-drink-price="35000">
+                <div>
+                  <div class="pop-card-meta">
+                    <span class="pop-rank-badge alt">Klasik</span>
+                    <span class="pop-rating">★ 4.9 (310+)</span>
+                  </div>
+                  <div class="pop-drink-visual">
+                    <img src="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=400&q=80" alt="Latte Klasik NESO" loading="lazy" />
+                  </div>
+                  <div class="pop-temp-switch" role="group" aria-label="Pilih Suhu">
+                    <button type="button" class="temp-chip" data-temp="Iced">Iced</button>
+                    <button type="button" class="temp-chip active" data-temp="Hot">Hot</button>
+                  </div>
+                  <h3 class="pop-drink-title">Latte Klasik</h3>
+                  <div class="pop-tasting-notes">
+                    <span class="note-tag">Silky Milk</span>
+                    <span class="note-tag">Nutty</span>
+                    <span class="note-tag">Balanced</span>
+                  </div>
+                </div>
+                <div class="pop-card-footer">
+                  <span class="pop-price">Rp 35.000</span>
+                  <div class="pop-btn-group">
+                    <button type="button" class="btn-pop-custom" onclick="openCustomizeModal('Latte Klasik', 35000)">Atur</button>
+                    <button type="button" class="btn-pop-order" onclick="quickAddPopular(this)">+ Pesan</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 3 -->
+              <article class="pop-drink-card" data-drink-name="Matcha Latte Uji" data-drink-price="38000">
+                <div>
+                  <div class="pop-card-meta">
+                    <span class="pop-rank-badge alt">Non-Kopi</span>
+                    <span class="pop-rating">★ 4.8 (280+)</span>
+                  </div>
+                  <div class="pop-drink-visual">
+                    <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=400&q=80" alt="Matcha Latte Uji" loading="lazy" />
+                  </div>
+                  <div class="pop-temp-switch" role="group" aria-label="Pilih Suhu">
+                    <button type="button" class="temp-chip active" data-temp="Iced">Iced</button>
+                    <button type="button" class="temp-chip" data-temp="Hot">Hot</button>
+                  </div>
+                  <h3 class="pop-drink-title">Matcha Latte Uji</h3>
+                  <div class="pop-tasting-notes">
+                    <span class="note-tag">Ceremonial</span>
+                    <span class="note-tag">Umami</span>
+                    <span class="note-tag">Smooth</span>
+                  </div>
+                </div>
+                <div class="pop-card-footer">
+                  <span class="pop-price">Rp 38.000</span>
+                  <div class="pop-btn-group">
+                    <button type="button" class="btn-pop-custom" onclick="openCustomizeModal('Matcha Latte Uji', 38000)">Atur</button>
+                    <button type="button" class="btn-pop-order" onclick="quickAddPopular(this)">+ Pesan</button>
+                  </div>
+                </div>
+              </article>
+
+              <!-- Card 4 -->
+              <article class="pop-drink-card" data-drink-name="Es Kopi Filter (V60)" data-drink-price="36000">
+                <div>
+                  <div class="pop-card-meta">
+                    <span class="pop-rank-badge alt">Single Origin</span>
+                    <span class="pop-rating">★ 4.9 (195+)</span>
+                  </div>
+                  <div class="pop-drink-visual">
+                    <img src="https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=400&q=80" alt="Es Kopi Filter V60" loading="lazy" />
+                  </div>
+                  <div class="pop-temp-switch" role="group" aria-label="Pilih Suhu">
+                    <button type="button" class="temp-chip active" data-temp="Iced">Iced</button>
+                    <button type="button" class="temp-chip" data-temp="Hot">Hot</button>
+                  </div>
+                  <h3 class="pop-drink-title">Es Kopi Filter V60</h3>
+                  <div class="pop-tasting-notes">
+                    <span class="note-tag">Floral</span>
+                    <span class="note-tag">Citrus</span>
+                    <span class="note-tag">Clean Finish</span>
+                  </div>
+                </div>
+                <div class="pop-card-footer">
+                  <span class="pop-price">Rp 36.000</span>
+                  <div class="pop-btn-group">
+                    <button type="button" class="btn-pop-custom" onclick="openCustomizeModal('Es Kopi Filter (V60)', 36000)">Atur</button>
+                    <button type="button" class="btn-pop-order" onclick="quickAddPopular(this)">+ Pesan</button>
+                  </div>
+                </div>
+              </article>
+            </div>
+
+            <!-- Interactive Pairing Upsell Strip -->
+            <div class="popular-pairing-strip">
+              <div class="pairing-info">
+                <span class="pairing-badge">Pairing Rekomendasi</span>
+                <span>Lengkapi kopimu dengan <strong>Croissant Almond Panggang</strong> hanya <strong>Rp 25.000</strong> (hemat Rp 7.000!)</span>
+              </div>
+              <button type="button" class="btn-white-pill" onclick="addToCart('Croissant Almond (Harga Pairing)', 25000)">
+                + Tambah Croissant
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== NEW SECTION 1: PAKET BUNDLING & PROMO ==================== -->
+      <section class="bundles-section" id="paket-promo">
+        <div class="container reveal">
+          <div class="section-header-flex">
+            <div>
+              <div class="section-eyebrow-green">Hemat Setiap Hari</div>
+              <h2 class="section-title-lg">Paket Bundling Kopi &amp; Pastri</h2>
+            </div>
+            <span style="font-size:0.82rem; color:var(--text-secondary);">Gunakan kode <strong>NESO15</strong> di keranjang untuk diskon tambahan 15%</span>
+          </div>
+
+          <div class="bundles-grid">
+            <article class="bundle-card">
+              <div class="bundle-cover">
+                <span class="bundle-save-pill">Hemat Rp 10.000</span>
+                <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=700&q=80" alt="Paket Morning Ritual NESO" loading="lazy" />
+              </div>
+              <div class="bundle-body">
+                <div>
+                  <h3 class="bundle-name">Morning Ritual Set</h3>
+                  <p class="bundle-desc">1 NESO Aren Latte (Iced/Hot) + 1 Croissant Almond panggang pagi.</p>
+                </div>
+                <div class="bundle-footer">
+                  <div>
+                    <span class="price-strike">Rp 68.000</span>
+                    <span class="price-final">Rp 58.000</span>
+                  </div>
+                  <button type="button" class="btn-terracotta" onclick="addToCart('Paket Morning Ritual Set', 58000)">Ambil Paket</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="bundle-card">
+              <div class="bundle-cover">
+                <span class="bundle-save-pill">Hemat Rp 12.000</span>
+                <img src="https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=700&q=80" alt="Paket Matcha Afternoon" loading="lazy" />
+              </div>
+              <div class="bundle-body">
+                <div>
+                  <h3 class="bundle-name">Sweet Afternoon Break</h3>
+                  <p class="bundle-desc">1 Matcha Latte Uji + 1 Cheesecake Beri lembut untuk teman sore.</p>
+                </div>
+                <div class="bundle-footer">
+                  <div>
+                    <span class="price-strike">Rp 76.000</span>
+                    <span class="price-final">Rp 64.000</span>
+                  </div>
+                  <button type="button" class="btn-terracotta" onclick="addToCart('Paket Sweet Afternoon Break', 64000)">Ambil Paket</button>
+                </div>
+              </div>
+            </article>
+
+            <article class="bundle-card">
+              <div class="bundle-cover">
+                <span class="bundle-save-pill">Hemat Rp 18.000</span>
+                <img src="https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=700&q=80" alt="Paket Brunch Berdua NESO" loading="lazy" />
+              </div>
+              <div class="bundle-body">
+                <div>
+                  <h3 class="bundle-name">NESO Brunch Berdua</h3>
+                  <p class="bundle-desc">2 Latte Klasik + 1 Sourdough Alpukat + 1 Quiche Ayam &amp; Jamur.</p>
+                </div>
+                <div class="bundle-footer">
+                  <div>
+                    <span class="price-strike">Rp 158.000</span>
+                    <span class="price-final">Rp 140.000</span>
+                  </div>
+                  <button type="button" class="btn-terracotta" onclick="addToCart('Paket NESO Brunch Berdua', 140000)">Ambil Paket</button>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== FULL INTERACTIVE MENU & PASTRIES ==================== -->
+      <section class="full-menu-section" id="katalog-menu">
+        <div class="container reveal">
+          <div class="menu-header-bar">
+            <h2 class="section-heading-center">
+              <span style="color:var(--neso-green);">♥</span>
+              <span>Menu Lengkap NESO</span>
+              <span style="color:var(--neso-green);">♥</span>
+            </h2>
+            <p class="section-sub-center">
+              Jelajahi seluruh racikan kopi, non-kopi, pastri segar, dan menu brunch harian kami.
+            </p>
+          </div>
+
+          <div class="menu-controls-bar">
+            <div class="filter-pills" role="tablist" aria-label="Kategori Menu NESO">
+              <button type="button" class="filter-pill active" data-menu-filter="all">Semua (14)</button>
+              <button type="button" class="filter-pill" data-menu-filter="kopi">Kopi &amp; Espresso</button>
+              <button type="button" class="filter-pill" data-menu-filter="non-kopi">Non-Kopi &amp; Teh</button>
+              <button type="button" class="filter-pill" data-menu-filter="pastri">Pastri &amp; Dessert</button>
+              <button type="button" class="filter-pill" data-menu-filter="makanan">Savory &amp; Brunch</button>
+            </div>
+
+            <div class="menu-search-box">
+              <svg class="menu-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+              <input type="search" id="menuSearchInput" placeholder="Cari kopi, matcha, croissant..." aria-label="Cari menu" />
+            </div>
+          </div>
+
+          <div class="menu-grid" id="interactiveMenuGrid"></div>
+        </div>
+      </section>
+
+      <!-- ==================== COFFEE BEANS SECTION ==================== -->
+      <section class="beans-section" id="biji-kopi">
+        <div class="container">
+          <div class="beans-card reveal">
+            <div>
+              <h2 class="beans-title">Biji Kopi Kebanggaan Kami</h2>
+              <p class="beans-desc">
+                Menjelajah kebun terbaik, menyangrai dengan ketelitian tinggi, dan menghadirkan karakter rasa autentik di setiap cangkir NESO.
+              </p>
+
+              <button type="button" class="btn-green" id="openBeansBtn">Pilih Biji Kopi</button>
+
+              <div class="beans-perks">
+                <div class="bean-perk">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
+                  </svg>
+                  <span>Pasokan langsung dari petani</span>
+                </div>
+
+                <div class="bean-perk">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/>
+                  </svg>
+                  <span>Sangrai sesuai pesanan</span>
+                </div>
+
+                <div class="bean-perk">
+                  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                    <path d="M6 2h12l2 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V7l2-5z"/>
+                    <path d="M4 7h16"/>
+                    <circle cx="12" cy="14" r="2.5"/>
+                  </svg>
+                  <span>Segar di setiap kemasan</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="beans-photo">
+              <img
+                src="https://images.unsplash.com/photo-1559056199-641a0ac8b55e?auto=format&fit=crop&w=900&q=85"
+                alt="Biji kopi sangrai segar dan kemasan NESO Coffee"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== NEW SECTION 2: SUASANA KAFE & SUDUT DUDUK ==================== -->
+      <section class="space-section" id="suasana-kafe">
+        <div class="container reveal">
+          <div class="section-header-flex">
+            <div>
+              <div class="section-eyebrow-green">Ruang &amp; Atmosfer</div>
+              <h2 class="section-title-lg">Temukan Sudut Favoritmu di NESO</h2>
+            </div>
+            <div class="live-seat-pill">
+              <span class="pulse-dot"></span>
+              <span>Tersedia 6 Meja Hari Ini</span>
+            </div>
+          </div>
+
+          <div class="space-bento-grid">
+            <article class="space-card">
+              <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=85" alt="Interior kafe NESO dengan pencahayaan alami hangat" loading="lazy" />
+              <div class="space-card-content">
+                <span class="space-tag">Indoor • Wi-Fi 300 Mbps &amp; Stopkontak</span>
+                <h3 class="space-title">Sunlit Window Workspace</h3>
+                <p class="space-desc">Meja kayu ek luas di tepi jendela kaca besar dengan pencahayaan alami lembut—ideal untuk bekerja fokus maupun membaca buku.</p>
+                <button type="button" class="btn-white-pill" onclick="openReserveWithArea('Indoor (Dekat Jendela)')">Pesan Sudut Ini</button>
+              </div>
+            </article>
+
+            <div class="space-stack">
+              <article class="space-card compact">
+                <img src="https://images.unsplash.com/photo-1521017432531-fbd92d768814?auto=format&fit=crop&w=700&q=80" alt="Slow Bar kopi manual NESO" loading="lazy" />
+                <div class="space-card-content">
+                  <span class="space-tag">Interactive Coffee Bar</span>
+                  <h3 class="space-title">Slow Bar &amp; Tasting Table</h3>
+                  <button type="button" class="btn-pop-order" style="margin-top:6px;" onclick="openReserveWithArea('Slow Bar (Meja Barista)')">Booking Kursi Bar</button>
+                </div>
+              </article>
+
+              <article class="space-card compact">
+                <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=700&q=80" alt="Teras taman hijau NESO" loading="lazy" />
+                <div class="space-card-content">
+                  <span class="space-tag">Outdoor • Pet-Friendly</span>
+                  <h3 class="space-title">Teras Taman Rindang</h3>
+                  <button type="button" class="btn-pop-order" style="margin-top:6px;" onclick="openReserveWithArea('Teras Taman (Outdoor)')">Booking Teras</button>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== NEW SECTION 3: ULASAN PELANGGAN & FAQ ==================== -->
+      <section class="community-section">
+        <div class="container community-grid reveal">
+          <div>
+            <div class="section-eyebrow-green">Cerita Komunitas</div>
+            <h2 class="section-title-lg" style="margin-bottom:18px;">Kata Mereka Tentang NESO</h2>
+
+            <div class="reviews-stack">
+              <article class="review-card">
+                <div class="review-top">
+                  <div class="reviewer-info">
+                    <img class="reviewer-avatar" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80" alt="Clarissa Tan" loading="lazy" />
+                    <div>
+                      <strong style="font-size:0.88rem; display:block;">Clarissa Tan</strong>
+                      <span style="font-size:0.72rem; color:var(--text-muted);">Product Designer • Pengunjung Rutin</span>
+                    </div>
+                  </div>
+                  <span style="color:#EAB308; font-size:0.82rem; font-weight:800;">★★★★★</span>
+                </div>
+                <p class="review-text">
+                  “NESO Aren Latte dengan Oat Milk dan Croissant Almond-nya selalu jadi penyelamat pagi sebelum meeting. Suasananya tenang dan baristanya ramah banget.”
+                </p>
+              </article>
+
+              <article class="review-card">
+                <div class="review-top">
+                  <div class="reviewer-info">
+                    <img class="reviewer-avatar" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80" alt="Dimas Prasetyo" loading="lazy" />
+                    <div>
+                      <strong style="font-size:0.88rem; display:block;">Dimas Prasetyo</strong>
+                      <span style="font-size:0.72rem; color:var(--text-muted);">Home Brewer • Pembeli Biji Kopi</span>
+                    </div>
+                  </div>
+                  <span style="color:#EAB308; font-size:0.82rem; font-weight:800;">★★★★★</span>
+                </div>
+                <p class="review-text">
+                  “Biji Aceh Gayo Honey-nya selalu dikirim dalam kondisi fresh roast kurang dari 4 hari. Aromanya wangi gula merah begitu kemasan dibuka!”
+                </p>
+              </article>
+            </div>
+          </div>
+
+          <div>
+            <div class="section-eyebrow-green">Informasi Praktis</div>
+            <h2 class="section-title-lg" style="margin-bottom:18px;">Pertanyaan Umum (FAQ)</h2>
+
+            <div class="faq-stack" id="faqAccordion">
+              <div class="faq-item open">
+                <button type="button" class="faq-question">
+                  <span>Apakah tersedia pilihan susu nabati (Oat / Soy Milk)?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                  Ya! Semua minuman berbasis susu di NESO dapat diganti dengan <strong>Oat Milk</strong> atau <strong>Soy Milk</strong> melalui tombol <strong>Atur</strong> pada setiap kartu minuman.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button type="button" class="faq-question">
+                  <span>Apakah kafe NESO nyaman untuk WFC / kerja dengan laptop?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                  Sangat nyaman. Area <em>Sunlit Window Workspace</em> dilengkapi Wi-Fi 300 Mbps, stopkontak di hampir setiap meja, dan pencahayaan alami yang tidak silau.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button type="button" class="faq-question">
+                  <span>Bisakah biji kopi digilingkan sesuai alat seduh di rumah?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                  Tentu saja. Saat memesan biji kopi 250g, Anda dapat memilih ukuran gilingan <strong>Biji Utuh</strong>, <strong>Espresso</strong>, <strong>V60 / Pour Over</strong>, maupun <strong>French Press</strong>.
+                </div>
+              </div>
+
+              <div class="faq-item">
+                <button type="button" class="faq-question">
+                  <span>Apakah area outdoor ramah untuk hewan peliharaan?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-answer">
+                  Ya, area <strong>Teras Taman Rindang</strong> kami sepenuhnya <em>pet-friendly</em> dan menyediakan mangkuk air minum segar gratis untuk anabul kesayangan Anda.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==================== VISIT US & NEWSLETTER ==================== -->
+      <section class="bottom-cta-section" id="kontak">
+        <div class="container bottom-grid reveal">
+          <div class="visit-box" id="visitBox">
+            <h2 class="visit-title">Kami Tunggu Kunjunganmu!</h2>
+            <ul class="visit-list">
+              <li>
+                <span class="visit-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                  </svg>
+                </span>
+                <span>Jl. Senopati No. 12<br />Jakarta Selatan</span>
+              </li>
+              <li>
+                <span class="visit-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <polyline points="12 6 12 12 16 14"/>
+                  </svg>
+                </span>
+                <span>Setiap hari &nbsp;08:00 – 21:00</span>
+              </li>
+              <li>
+                <span class="visit-icon">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+                  </svg>
+                </span>
+                <a href="tel:+62215550192">+62 (21) 555-0192</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="newsletter-card">
+            <div>
+              <h2 class="newsletter-title">Dapatkan info berita terbaru dan promo spesial NESO</h2>
+              <form class="newsletter-form" id="newsletterForm">
+                <input type="email" id="newsletterEmail" placeholder="Email Anda" required aria-label="Masukkan alamat email Anda" />
+                <button type="submit">Berlangganan</button>
+              </form>
+              <div class="newsletter-feedback" id="newsletterFeedback" role="status"></div>
+            </div>
+
+            <div class="cafe-sketch" aria-hidden="true">
+              <svg width="135" height="105" viewBox="0 0 150 115" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 45 L26 98"/>
+                <path d="M25 72 L45 72 L45 98"/>
+                <ellipse cx="75" cy="54" rx="28" ry="6"/>
+                <line x1="75" y1="60" x2="75" y2="98"/>
+                <path d="M58 98 L92 98"/>
+                <path d="M68 44 h10 v6 a3 3 0 0 1 -3 3 h-4 a3 3 0 0 1 -3 -3 z"/>
+                <path d="M128 45 L124 98"/>
+                <path d="M125 72 L105 72 L105 98"/>
+                <line x1="75" y1="0" x2="75" y2="18"/>
+                <path d="M63 26 a12 9 0 0 1 24 0 z"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="footer">
+      <div class="container footer-inner">
+        <div class="footer-brand">
+          <div class="footer-socials">
+            <a href="#kontak" class="footer-social-btn" aria-label="Telegram" onclick="showToast('Membuka kanal Telegram NESO Coffee')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m22 2-7 20-4-9-9-4Z"/>
+                <path d="M22 2 11 13"/>
+              </svg>
+            </a>
+            <a href="#kontak" class="footer-social-btn" aria-label="WhatsApp" onclick="showToast('Menghubungkan ke WhatsApp NESO')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+              </svg>
+            </a>
+            <a href="#kontak" class="footer-social-btn" aria-label="Instagram" onclick="showToast('Membuka Instagram @neso.coffee')">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5"/>
+                <circle cx="12" cy="12" r="4"/>
+                <circle cx="17.5" cy="6.5" r="1"/>
+              </svg>
+            </a>
+          </div>
+          <strong>NESO — Coffee Shop &amp; Pastries</strong>
+        </div>
+
+        <div>© NESO Coffee, 2026</div>
+
+        <div class="footer-links">
+          <a href="#kontak" onclick="showToast('Kebijakan Privasi: Data pelanggan terlindungi 100%')">Kebijakan Privasi</a>
+          <a href="#kontak" onclick="showToast('Syarat & Ketentuan Layanan NESO')">Syarat &amp; Ketentuan</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- ==================== SLIDE-OVER CART DRAWER ==================== -->
+  <div class="drawer-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Keranjang Pesanan NESO">
+    <div class="cart-drawer-header">
+      <h3 class="modal-title">Pesanan Anda</h3>
+      <button type="button" class="modal-close" id="closeCartBtn" aria-label="Tutup Keranjang">✕</button>
+    </div>
+
+    <div class="cart-mode-toggle">
+      <button type="button" class="mode-btn active" data-order-mode="takeaway">Ambil di Kafe</button>
+      <button type="button" class="mode-btn" data-order-mode="delivery">Antar (+Rp 12.000)</button>
+    </div>
+
+    <div class="cart-drawer-body" id="cartItemsContainer"></div>
+
+    <div class="cart-drawer-footer" id="cartFooter" style="display:none;">
+      <div class="promo-row">
+        <input type="text" id="promoInput" placeholder="Kode promo (coba: NESO15)" aria-label="Kode Promo" />
+        <button type="button" id="applyPromoBtn">Pakai</button>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-size:0.82rem; color:var(--text-secondary); margin-bottom:4px;">
+        <span>Subtotal</span>
+        <span id="cartSubtotalText">Rp 0</span>
+      </div>
+      <div id="cartDiscountRow" style="display:none; justify-content:space-between; font-size:0.82rem; color:var(--neso-green); font-weight:700; margin-bottom:4px;">
+        <span>Diskon NESO15 (15%)</span>
+        <span id="cartDiscountText">-Rp 0</span>
+      </div>
+      <div id="cartDeliveryRow" style="display:none; justify-content:space-between; font-size:0.82rem; color:var(--text-secondary); margin-bottom:6px;">
+        <span>Ongkos Kirim</span>
+        <span>Rp 12.000</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; font-weight:800; font-size:1.05rem; margin-bottom:14px; padding-top:8px; border-top:1px solid var(--border-soft);">
+        <span>Total Pembayaran</span>
+        <span id="cartTotalText">Rp 0</span>
+      </div>
+      <button type="button" class="btn-terracotta" id="checkoutBtn" style="width:100%;">Konfirmasi Pesanan</button>
+    </div>
+  </aside>
+
+  <!-- ==================== MODAL 1: DRINK CUSTOMIZATION ==================== -->
+  <div class="modal-backdrop" id="customModal" role="dialog" aria-modal="true" aria-labelledby="customModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="customModalTitle">Atur Minuman</h3>
+        <button type="button" class="modal-close" data-close-modal="customModal" aria-label="Tutup">✕</button>
+      </div>
+
+      <span class="option-group-label">Pilih Penyajian</span>
+      <div class="option-pills" id="tempOptions">
+        <button type="button" class="opt-pill selected" data-val="Iced (Dingin)">Iced (Dingin)</button>
+        <button type="button" class="opt-pill" data-val="Hot (Hangat)">Hot (Hangat)</button>
+      </div>
+
+      <span class="option-group-label">Tingkat Kemanisan</span>
+      <div class="option-pills" id="sugarOptions">
+        <button type="button" class="opt-pill selected" data-val="Normal Sugar">Normal Sugar</button>
+        <button type="button" class="opt-pill" data-val="Less Sugar">Less Sugar (50%)</button>
+        <button type="button" class="opt-pill" data-val="No Sugar">Tanpa Gula</button>
+      </div>
+
+      <span class="option-group-label">Pilihan Susu</span>
+      <div class="option-pills" id="milkOptions">
+        <button type="button" class="opt-pill selected" data-val="Fresh Milk" data-extra="0">Fresh Milk (Standar)</button>
+        <button type="button" class="opt-pill" data-val="Oat Milk" data-extra="6000">Oat Milk (+Rp 6.000)</button>
+      </div>
+
+      <button type="button" class="btn-terracotta" id="confirmCustomBtn" style="width:100%; margin-top:8px;">
+        Tambahkan ke Keranjang
+      </button>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 2: TENTANG KAMI ==================== -->
+  <div class="modal-backdrop" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="aboutModalTitle">Tentang NESO Coffee &amp; Pastries</h3>
+        <button type="button" class="modal-close" data-close-modal="aboutModal" aria-label="Tutup">✕</button>
+      </div>
+
+      <div class="modal-tabs" role="tablist">
+        <button type="button" class="modal-tab-btn active" data-about-tab="filosofi">Filosofi NESO</button>
+        <button type="button" class="modal-tab-btn" data-about-tab="roastery">Roastery &amp; Petani</button>
+        <button type="button" class="modal-tab-btn" data-about-tab="fasilitas">Fasilitas Kafe</button>
+      </div>
+
+      <div class="about-tab-panel active" id="panel-filosofi">
+        <p>
+          <strong>NESO — Coffee Shop &amp; Pastries</strong> hadir dengan semangat ramah dan hangat layaknya kucing kecil yang menyambutmu pulang. Kami memadukan biji 100% Arabika pilihan dengan pastri artisan yang dipanggang setiap pagi.
+        </p>
+        <div class="about-stat-grid">
+          <div class="about-stat-box">
+            <strong>100%</strong>
+            <span>Arabika Terkurasi</span>
+          </div>
+          <div class="about-stat-box">
+            <strong>14+</strong>
+            <span>Menu Segar Harian</span>
+          </div>
+          <div class="about-stat-box">
+            <strong>4.9 ★</strong>
+            <span>Rating Pelanggan</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="about-tab-panel" id="panel-roastery">
+        <p>
+          Kami bekerja sama langsung dengan petani kopi di Aceh Gayo, Flores Bajawa, dan Toraja. Penyangraian dilakukan setiap Selasa dan Jumat dalam batch kecil untuk menjaga karakter rasa alami.
+        </p>
+      </div>
+
+      <div class="about-tab-panel" id="panel-fasilitas">
+        <p>
+          Area duduk tenang dengan Wi-Fi 300 Mbps, stopkontak di setiap sudut, ruang baca nyaman, dan teras taman rindang yang ramah hewan peliharaan.
+        </p>
+      </div>
+
+      <div style="margin-top:20px; display:flex; gap:10px;">
+        <button type="button" class="btn-terracotta" style="flex:1;" onclick="closeModal('aboutModal'); openModal('reserveModal');">Pesan Meja Sekarang</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 3: PILIH BIJI KOPI ==================== -->
+  <div class="modal-backdrop" id="beansModal" role="dialog" aria-modal="true" aria-labelledby="beansModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="beansModalTitle">Biji Kopi Sangrai NESO (250g)</h3>
+        <button type="button" class="modal-close" data-close-modal="beansModal" aria-label="Tutup">✕</button>
+      </div>
+
+      <div class="form-group">
+        <label for="grindSelect">Pilih Jenis Gilingan</label>
+        <select id="grindSelect" class="form-control">
+          <option value="Biji Utuh">Biji Utuh (Whole Bean)</option>
+          <option value="Giling Halus">Giling Halus (Espresso / Mokapot)</option>
+          <option value="Giling Sedang">Giling Sedang (V60 / Pour Over)</option>
+          <option value="Giling Kasar">Giling Kasar (French Press / Cold Brew)</option>
+        </select>
+      </div>
+
+      <div>
+        <div class="modal-item-row">
+          <div>
+            <strong>Aceh Gayo Honey (250g)</strong>
+            <div style="font-size:0.78rem; color:var(--text-secondary);">Notes: Gula merah, apel merah, cokelat lembut</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <strong>Rp 115.000</strong>
+            <button type="button" class="btn-plus" onclick="addBeanToCart('Aceh Gayo Honey 250g', 115000)">+</button>
+          </div>
+        </div>
+        <div class="modal-item-row">
+          <div>
+            <strong>Flores Bajawa Washed (250g)</strong>
+            <div style="font-size:0.78rem; color:var(--text-secondary);">Notes: Karamel, kacang panggang, vanila</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <strong>Rp 110.000</strong>
+            <button type="button" class="btn-plus" onclick="addBeanToCart('Flores Bajawa Washed 250g', 110000)">+</button>
+          </div>
+        </div>
+        <div class="modal-item-row">
+          <div>
+            <strong>Ethiopia Yirgacheffe (250g)</strong>
+            <div style="font-size:0.78rem; color:var(--text-secondary);">Notes: Melati, bergamot, persik segar</div>
+          </div>
+          <div style="display:flex; align-items:center; gap:10px;">
+            <strong>Rp 145.000</strong>
+            <button type="button" class="btn-plus" onclick="addBeanToCart('Ethiopia Yirgacheffe 250g', 145000)">+</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== MODAL 4: PESAN MEJA ==================== -->
+  <div class="modal-backdrop" id="reserveModal" role="dialog" aria-modal="true" aria-labelledby="reserveModalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h3 class="modal-title" id="reserveModalTitle">Reservasi Meja di NESO</h3>
+        <button type="button" class="modal-close" data-close-modal="reserveModal" aria-label="Tutup">✕</button>
+      </div>
+      <form id="reserveForm">
+        <div class="form-group">
+          <label for="guestName">Nama Lengkap</label>
+          <input type="text" id="guestName" class="form-control" placeholder="Contoh: Nadia Kusuma" required />
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="reserveDate">Tanggal</label>
+            <input type="date" id="reserveDate" class="form-control" required />
+          </div>
+          <div class="form-group">
+            <label for="reserveTime">Jam Kedatangan</label>
+            <select id="reserveTime" class="form-control">
+              <option>09:00 WIB</option>
+              <option>11:30 WIB</option>
+              <option>14:00 WIB</option>
+              <option>16:30 WIB</option>
+              <option>19:00 WIB</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-group">
+            <label for="guestCount">Jumlah Tamu</label>
+            <select id="guestCount" class="form-control">
+              <option>1 Orang</option>
+              <option selected>2 Orang</option>
+              <option>4 Orang</option>
+              <option>6+ Orang</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="seatArea">Area Duduk</label>
+            <select id="seatArea" class="form-control">
+              <option value="Indoor (Dekat Jendela)">Indoor (Dekat Jendela)</option>
+              <option value="Teras Taman (Outdoor)">Teras Taman (Outdoor)</option>
+              <option value="Slow Bar (Meja Barista)">Slow Bar (Meja Barista)</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" class="btn-terracotta" style="width:100%; margin-top:8px;">Konfirmasi Reservasi</button>
+      </form>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+
+  <script>
+    // ==================== INTERACTIVE POPULAR DRINKS TEMP SWITCH & QUICK ADD ====================
+    document.querySelectorAll('.pop-temp-switch').forEach((group) => {
+      group.querySelectorAll('.temp-chip').forEach((chip) => {
+        chip.addEventListener('click', (e) => {
+          e.stopPropagation();
+          group.querySelectorAll('.temp-chip').forEach((c) => c.classList.remove('active'));
+          chip.classList.add('active');
+        });
+      });
+    });
+
+    function quickAddPopular(btnEl) {
+      const card = btnEl.closest('.pop-drink-card');
+      const name = card.getAttribute('data-drink-name');
+      const price = Number(card.getAttribute('data-drink-price'));
+      const activeTemp = card.querySelector('.temp-chip.active')?.getAttribute('data-temp') || 'Iced';
+      addToCart(`${name} (${activeTemp})`, price);
+    }
+
+    // ==================== DATA MENU LENGKAP NESO (14 ITEM) ====================
+    const nesoMenuItems = [
+      {
+        name: 'NESO Signature Aren Latte',
+        category: 'kopi',
+        catLabel: 'Kopi',
+        tag: 'Best Seller',
+        price: 36000,
+        customizable: true,
+        desc: 'Espresso house blend dengan gula aren organik dan susu creamy.',
+        img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Latte Klasik',
+        category: 'kopi',
+        catLabel: 'Kopi',
+        tag: '',
+        price: 35000,
+        customizable: true,
+        desc: 'Double shot espresso dengan steamed milk lembut dan latte art.',
+        img: 'https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Es Kopi Filter (V60)',
+        category: 'kopi',
+        catLabel: 'Kopi',
+        tag: 'Single Origin',
+        price: 36000,
+        customizable: false,
+        desc: 'Seduhan manual biji pilihan dengan aroma floral dan citrus segar.',
+        img: 'https://images.unsplash.com/photo-1517701550927-30cf4ba1dba5?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Caramel Macchiato',
+        category: 'kopi',
+        catLabel: 'Kopi',
+        tag: '',
+        price: 39000,
+        customizable: true,
+        desc: 'Espresso berlapis susu segar, sirup vanila, dan saus karamel.',
+        img: 'https://images.unsplash.com/photo-1485808191679-5f86510681a2?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Matcha Latte Uji',
+        category: 'non-kopi',
+        catLabel: 'Non-Kopi',
+        tag: 'Favorit',
+        price: 38000,
+        customizable: true,
+        desc: 'Bubuk matcha ceremonial Jepang dengan susu segar yang lembut.',
+        img: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Hojicha Roasted Latte',
+        category: 'non-kopi',
+        catLabel: 'Non-Kopi',
+        tag: '',
+        price: 37000,
+        customizable: true,
+        desc: 'Teh hijau panggang khas Kyoto dengan aroma kacang hangat.',
+        img: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Dark Chocolate Belgia',
+        category: 'non-kopi',
+        catLabel: 'Non-Kopi',
+        tag: '',
+        price: 37000,
+        customizable: true,
+        desc: 'Cokelat pekat 70% kakao yang kaya rasa, nikmat hangat atau dingin.',
+        img: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Yuzu Honey Sparkling',
+        category: 'non-kopi',
+        catLabel: 'Non-Kopi',
+        tag: 'Segar',
+        price: 34000,
+        customizable: false,
+        desc: 'Perasan jeruk yuzu Jepang, madu hutan, dan soda dingin menyegarkan.',
+        img: 'https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Croissant Almond',
+        category: 'pastri',
+        catLabel: 'Pastri',
+        tag: 'Fresh Bake',
+        price: 32000,
+        customizable: false,
+        desc: 'Renyah berlapis di luar, lembut dengan krim almond panggang di dalam.',
+        img: 'https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Cheesecake Beri',
+        category: 'pastri',
+        catLabel: 'Dessert',
+        tag: '',
+        price: 38000,
+        customizable: false,
+        desc: 'Cheesecake lembut dengan topping selai dan buah beri musiman.',
+        img: 'https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Kukis Cokelat Lumer',
+        category: 'pastri',
+        catLabel: 'Pastri',
+        tag: '',
+        price: 24000,
+        customizable: false,
+        desc: 'Hangat, empuk di tengah, dengan potongan dark chocolate melimpah.',
+        img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Cinnamon Roll Karamel',
+        category: 'pastri',
+        catLabel: 'Pastri',
+        tag: '',
+        price: 30000,
+        customizable: false,
+        desc: 'Roti gulung kayu manis hangat dengan saus karamel asin.',
+        img: 'https://images.unsplash.com/photo-1509365465985-25d11c17e812?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Quiche Ayam & Jamur',
+        category: 'makanan',
+        catLabel: 'Savory',
+        tag: 'Chef Pick',
+        price: 42000,
+        customizable: false,
+        desc: 'Tart gurih panggang dengan isian ayam asap, jamur, dan keju.',
+        img: 'https://images.unsplash.com/photo-1608039755401-742074f0548d?auto=format&fit=crop&w=400&q=80'
+      },
+      {
+        name: 'Sourdough Alpukat & Telur',
+        category: 'makanan',
+        catLabel: 'Brunch',
+        tag: 'All-Day',
+        price: 46000,
+        customizable: false,
+        desc: 'Roti sourdough panggang, alpukat tumbuk segar, dan telur setengah matang.',
+        img: 'https://images.unsplash.com/photo-1525351484163-7529414344d8?auto=format&fit=crop&w=400&q=80'
+      }
+    ];
+
+    function formatRupiah(num) {
+      return 'Rp ' + num.toLocaleString('id-ID');
+    }
+
+    let activeMenuCategory = 'all';
+    let menuSearchQuery = '';
+
+    function renderInteractiveMenu() {
+      const grid = document.getElementById('interactiveMenuGrid');
+      const filtered = nesoMenuItems.filter((item) => {
+        const matchCat = activeMenuCategory === 'all' || item.category === activeMenuCategory;
+        const q = menuSearchQuery.trim().toLowerCase();
+        const matchQuery = !q || item.name.toLowerCase().includes(q) || item.desc.toLowerCase().includes(q);
+        return matchCat && matchQuery;
+      });
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--text-secondary); padding:28px;">Menu tidak ditemukan. Coba kata kunci lain seperti <strong>Latte</strong> atau <strong>Croissant</strong>.</p>';
+        return;
+      }
+
+      grid.innerHTML = filtered.map((item) => `
+        <article class="menu-card">
+          <div class="menu-thumb">
+            ${item.tag ? `<span class="menu-tag">${item.tag}</span>` : ''}
+            <img src="${item.img}" alt="${item.name}" loading="lazy" />
+          </div>
+          <div class="menu-info">
+            <div>
+              <span class="menu-cat-label">${item.catLabel}</span>
+              <h3 class="menu-title">${item.name}</h3>
+              <p class="menu-desc">${item.desc}</p>
+            </div>
+            <div class="menu-bottom">
+              <span class="menu-price">${formatRupiah(item.price)}</span>
+              <div class="menu-card-actions">
+                ${item.customizable ? `<button type="button" class="btn-customize" onclick="openCustomizeModal('${item.name.replace(/'/g, "\\'")}', ${item.price})">Atur</button>` : ''}
+                <button type="button" class="btn-plus" onclick="addToCart('${item.name.replace(/'/g, "\\'")}', ${item.price})" aria-label="Tambah ${item.name}">+</button>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    document.querySelectorAll('[data-menu-filter]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-menu-filter]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeMenuCategory = btn.getAttribute('data-menu-filter');
+        renderInteractiveMenu();
+      });
+    });
+
+    document.getElementById('menuSearchInput').addEventListener('input', (e) => {
+      menuSearchQuery = e.target.value;
+      renderInteractiveMenu();
+    });
+
+    renderInteractiveMenu();
+
+    // ==================== FAQ ACCORDION ====================
+    document.querySelectorAll('#faqAccordion .faq-question').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const parent = btn.parentElement;
+        const wasOpen = parent.classList.contains('open');
+        document.querySelectorAll('#faqAccordion .faq-item').forEach((item) => item.classList.remove('open'));
+        if (!wasOpen) parent.classList.add('open');
+      });
+    });
+
+    // ==================== DRINK CUSTOMIZATION MODAL ====================
+    let currentCustomItem = { name: '', basePrice: 0 };
+
+    function openCustomizeModal(name, basePrice) {
+      currentCustomItem = { name, basePrice };
+      document.getElementById('customModalTitle').textContent = `Atur ${name}`;
+      openModal('customModal');
+    }
+
+    ['tempOptions', 'sugarOptions', 'milkOptions'].forEach((groupId) => {
+      const container = document.getElementById(groupId);
+      container.querySelectorAll('.opt-pill').forEach((pill) => {
+        pill.addEventListener('click', () => {
+          container.querySelectorAll('.opt-pill').forEach((p) => p.classList.remove('selected'));
+          pill.classList.add('selected');
+        });
+      });
+    });
+
+    document.getElementById('confirmCustomBtn').addEventListener('click', () => {
+      const temp = document.querySelector('#tempOptions .opt-pill.selected').getAttribute('data-val');
+      const sugar = document.querySelector('#sugarOptions .opt-pill.selected').getAttribute('data-val');
+      const milkBtn = document.querySelector('#milkOptions .opt-pill.selected');
+      const milk = milkBtn.getAttribute('data-val');
+      const extra = Number(milkBtn.getAttribute('data-extra') || 0);
+
+      const finalName = `${currentCustomItem.name} (${temp}, ${sugar}, ${milk})`;
+      addToCart(finalName, currentCustomItem.basePrice + extra);
+      closeModal('customModal');
+    });
+
+    // ==================== NAVIGATION & MODALS ====================
+    const mobileNav = document.getElementById('mobileNav');
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+      mobileNav.classList.toggle('open');
+    });
+
+    function setActiveNav(key) {
+      document.querySelectorAll('[data-nav]').forEach((el) => {
+        el.classList.toggle('active', el.getAttribute('data-nav') === key);
+      });
+    }
+
+    document.querySelectorAll('[data-nav]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const target = btn.getAttribute('data-nav');
+        setActiveNav(target);
+        mobileNav.classList.remove('open');
+
+        if (target === 'menu') {
+          document.getElementById('minuman-populer').scrollIntoView({ behavior: 'smooth' });
+        } else if (target === 'promo') {
+          document.getElementById('paket-promo').scrollIntoView({ behavior: 'smooth' });
+        } else if (target === 'tentang') {
+          document.getElementById('tentang').scrollIntoView({ behavior: 'smooth' });
+          openAboutWithTab('filosofi');
+        } else if (target === 'biji') {
+          document.getElementById('biji-kopi').scrollIntoView({ behavior: 'smooth' });
+          openModal('beansModal');
+        } else if (target === 'suasana') {
+          document.getElementById('suasana-kafe').scrollIntoView({ behavior: 'smooth' });
+        } else if (target === 'kontak') {
+          const visitBox = document.getElementById('visitBox');
+          document.getElementById('kontak').scrollIntoView({ behavior: 'smooth' });
+          visitBox.classList.add('highlight-pulse');
+          setTimeout(() => visitBox.classList.remove('highlight-pulse'), 1800);
+        }
+      });
+    });
+
+    function openAboutWithTab(tabName) {
+      document.querySelectorAll('[data-about-tab]').forEach((b) => {
+        b.classList.toggle('active', b.getAttribute('data-about-tab') === tabName);
+      });
+      document.querySelectorAll('.about-tab-panel').forEach((panel) => {
+        panel.classList.toggle('active', panel.id === 'panel-' + tabName);
+      });
+      openModal('aboutModal');
+    }
+
+    document.querySelectorAll('[data-about-tab]').forEach((btn) => {
+      btn.addEventListener('click', () => openAboutWithTab(btn.getAttribute('data-about-tab')));
+    });
+
+    function openReserveWithArea(areaName) {
+      const seatSelect = document.getElementById('seatArea');
+      if (seatSelect) seatSelect.value = areaName;
+      openModal('reserveModal');
+    }
+
+    function openModal(id) {
+      document.getElementById(id).classList.add('active');
+    }
+
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('active');
+    }
+
+    document.querySelectorAll('[data-close-modal]').forEach((btn) => {
+      btn.addEventListener('click', () => closeModal(btn.getAttribute('data-close-modal')));
+    });
+
+    document.querySelectorAll('.modal-backdrop').forEach((backdrop) => {
+      backdrop.addEventListener('click', (e) => {
+        if (e.target === backdrop) backdrop.classList.remove('active');
+      });
+    });
+
+    document.getElementById('openReserveBtn').addEventListener('click', () => openModal('reserveModal'));
+    document.getElementById('heroAboutBtn').addEventListener('click', () => openAboutWithTab('filosofi'));
+    document.getElementById('openBeansBtn').addEventListener('click', () => openModal('beansModal'));
+
+    // ==================== SLIDE-OVER CART DRAWER & PROMO ====================
+    const cart = [];
+    let orderMode = 'takeaway';
+    let promoDiscountRate = 0;
+
+    const cartDrawer = document.getElementById('cartDrawer');
+    const cartBackdrop = document.getElementById('cartBackdrop');
+
+    function openCartDrawer() {
+      renderCart();
+      cartDrawer.classList.add('open');
+      cartBackdrop.classList.add('open');
+    }
+
+    function closeCartDrawer() {
+      cartDrawer.classList.remove('open');
+      cartBackdrop.classList.remove('open');
+    }
+
+    document.getElementById('openCartBtn').addEventListener('click', openCartDrawer);
+    document.getElementById('closeCartBtn').addEventListener('click', closeCartDrawer);
+    cartBackdrop.addEventListener('click', closeCartDrawer);
+
+    document.querySelectorAll('[data-order-mode]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-order-mode]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        orderMode = btn.getAttribute('data-order-mode');
+        renderCart();
+      });
+    });
+
+    document.getElementById('applyPromoBtn').addEventListener('click', () => {
+      const code = document.getElementById('promoInput').value.trim().toUpperCase();
+      if (code === 'NESO15') {
+        promoDiscountRate = 0.15;
+        showToast('✓ Kode promo NESO15 (diskon 15%) berhasil dipasang!');
+        renderCart();
+      } else {
+        showToast('Kode promo tidak valid. Coba masukkan: NESO15');
+      }
+    });
+
+    function updateCartBadge() {
+      const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+      document.getElementById('cartCount').textContent = totalQty;
+    }
+
+    function addToCart(name, price) {
+      const existing = cart.find((item) => item.name === name);
+      if (existing) {
+        existing.qty += 1;
+      } else {
+        cart.push({ name, price, qty: 1 });
+      }
+      updateCartBadge();
+      showToast(`✓ ${name} masuk ke keranjang`);
+    }
+
+    function addBeanToCart(beanName, price) {
+      const grind = document.getElementById('grindSelect').value;
+      addToCart(`${beanName} (${grind})`, price);
+    }
+
+    function changeQty(index, delta) {
+      cart[index].qty += delta;
+      if (cart[index].qty <= 0) {
+        cart.splice(index, 1);
+      }
+      updateCartBadge();
+      renderCart();
+    }
+
+    function renderCart() {
+      const container = document.getElementById('cartItemsContainer');
+      const footer = document.getElementById('cartFooter');
+
+      if (cart.length === 0) {
+        container.innerHTML = '<p style="color:var(--text-secondary); font-size:0.9rem; padding:24px 0; text-align:center;">Keranjang NESO masih kosong.<br/>Pilih minuman populer, paket bundling, atau pastri favoritmu!</p>';
+        footer.style.display = 'none';
+        return;
+      }
+
+      let subtotal = 0;
+      container.innerHTML = cart.map((item, idx) => {
+        const lineTotal = item.price * item.qty;
+        subtotal += lineTotal;
+        return `
+          <div class="modal-item-row">
+            <div>
+              <strong style="font-size:0.88rem;">${item.name}</strong>
+              <div style="font-size:0.78rem; color:var(--text-secondary);">${formatRupiah(item.price)}</div>
+            </div>
+            <div class="cart-qty-controls">
+              <button type="button" onclick="changeQty(${idx}, -1)" aria-label="Kurangi">−</button>
+              <span>${item.qty}</span>
+              <button type="button" onclick="changeQty(${idx}, 1)" aria-label="Tambah">+</button>
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      const discount = Math.round(subtotal * promoDiscountRate);
+      const deliveryFee = orderMode === 'delivery' ? 12000 : 0;
+      const grandTotal = subtotal - discount + deliveryFee;
+
+      document.getElementById('cartSubtotalText').textContent = formatRupiah(subtotal);
+      const discountRow = document.getElementById('cartDiscountRow');
+      if (discount > 0) {
+        discountRow.style.display = 'flex';
+        document.getElementById('cartDiscountText').textContent = '-' + formatRupiah(discount);
+      } else {
+        discountRow.style.display = 'none';
+      }
+
+      document.getElementById('cartDeliveryRow').style.display = orderMode === 'delivery' ? 'flex' : 'none';
+      document.getElementById('cartTotalText').textContent = formatRupiah(grandTotal);
+      footer.style.display = 'block';
+    }
+
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      cart.length = 0;
+      promoDiscountRate = 0;
+      document.getElementById('promoInput').value = '';
+      updateCartBadge();
+      closeCartDrawer();
+      showToast('Pesanan diterima! Barista NESO segera menyiapkannya.');
+    });
+
+    // Toast
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 2700);
+    }
+
+    // Reservation & Newsletter
+    document.getElementById('reserveForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('guestName').value;
+      const time = document.getElementById('reserveTime').value;
+      const area = document.getElementById('seatArea').value;
+      closeModal('reserveModal');
+      e.target.reset();
+      showToast(`Meja (${area}) atas nama ${name} jam ${time} berhasil dipesan!`);
+    });
+
+    document.getElementById('newsletterForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const emailInput = document.getElementById('newsletterEmail');
+      document.getElementById('newsletterFeedback').textContent = `Terima kasih! Promo NESO & menu baru akan dikirim ke ${emailInput.value}.`;
+      emailInput.value = '';
+    });
+
+    // Scroll Reveal
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+  </script>
+</body>
+</html>
